@@ -83,7 +83,7 @@ void setup()
 void test1()
 {
   // uint16_t position = qtr.readLineBlack(sensorValues);
-  uint16_t position = qtr.readLineWhite(sensorValues);
+  uint16_t position = qtr.readLineBlack(sensorValues);
   Input = position;
 
   Serial.println(position);
