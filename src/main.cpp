@@ -9,6 +9,8 @@
 #define IN3 9
 #define IN4 8
 
+#define THRESHOLD 1000
+
 QTRSensors qtr;
 
 const uint8_t SensorCount = 8;
@@ -55,6 +57,8 @@ void setup()
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
 
+  myPID.SetSampleTime(10);
+
   Serial.begin(9600);
 
   qtr.setTypeAnalog();
@@ -75,18 +79,19 @@ void setup()
 }
 
 
+
 void test1()
 {
   // uint16_t position = qtr.readLineBlack(sensorValues);
-    uint16_t position = qtr.readLineWhite(sensorValues);
-
+  uint16_t position = qtr.readLineWhite(sensorValues);
   Input = position;
+
+  Serial.println(position);
+
   myPID.Compute();
-  //output = 
-  Serial.println("Input: " + String(Input) + " Output: " + String(Output));
+  Serial.println(position);
   motorWrite_Left(100 - Output);
   motorWrite_Right(100 + Output);
-  delay(10);
 }
 
 void loop()
